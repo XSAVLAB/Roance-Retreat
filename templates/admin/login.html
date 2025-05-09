@@ -1,0 +1,6 @@
+{% extends "admin/login.html" %}
+
+{% block content %}
+{{ block.super }}
+
+<p style="margin-top: 10px;"> <a href="{% url 'admin_password_reset' %}"></a> </p> {% endblock %}

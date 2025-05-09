@@ -1,0 +1,388 @@
+{% extends 'index.html' %}
+
+{% load  static  %}
+
+{% block title %}
+    Romance Retreat
+{% endblock title %}
+    
+{% block content %}
+
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <img src="{{home.image.url}}" alt="" data-aos="fade-in">
+
+      <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2 style="font-family: 'Georgia', sans-serif;">Crafting Timeless Moments:<h2>
+              <p style="font-family: 'Georgia', sans-serif; font-size: 16px;">Ensuring Your Celebration is Unforgettable!<p>
+            <p style="font-size: 14px;">  Let us help you write your next beautiful chapter. </p>
+            <a href="#about" class="btn-get-started">Get Started</a>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    
+    <section id="about" class="about section">
+      <!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+  <h2>About</h2>
+  <p><span></span> <span class="description-title">About Us<br></span></p>
+</div><!-- End Section Title -->
+
+<div class="container">
+  <div class="row gy-5 align-items-center">
+
+    <!-- Text Content (Left Side) -->
+    <div class="content col-xl-5 d-flex flex-column" data-aos="fade-up" data-aos-delay="100">
+      <h3>{{ about.title }}</h3>
+      <p>{{ about.description }}</p>
+      <a href="#" class="about-btn align-self-center align-self-xl-start">
+        <span>About us</span> <i class="bi bi-chevron-right"></i>
+      </a>
+    </div>
+
+    <!-- Image Content (Right Side) -->
+    <div class="col-xl-7" data-aos="fade-left" data-aos-delay="200">
+      <img src= "{{ about.image.url }}" alt="{{ about.title }}" class="img-fluid rounded-4 shadow">
+    </div>
+
+  </div>
+</div>
+
+          
+
+         <!-- <div class="col-xl-7" data-aos="fade-up" data-aos-delay="200">
+            <div class="row gy-4">
+
+              <div class="col-md-6 icon-box position-relative">
+                <i class="bi bi-briefcase"></i>
+                <h4><a href="" class="stretched-link">Corporis voluptates sit</a></h4>
+                <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+              </div>
+
+              <div class="col-md-6 icon-box position-relative">
+                <i class="bi bi-gem"></i>
+                <h4><a href="" class="stretched-link">Ullamco laboris nisi</a></h4>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+              </div>
+
+              <div class="col-md-6 icon-box position-relative">
+                <i class="bi bi-broadcast"></i>
+                <h4><a href="" class="stretched-link">Labore consequatur</a></h4>
+                <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+              </div>
+
+              <div class="col-md-6 icon-box position-relative">
+                <i class="bi bi-easel"></i>
+                <h4><a href="" class="stretched-link">Beatae veritatis</a></h4>
+                <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+              </div> -->
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Services Section --> 
+    <section id="services" class="services section">
+
+     <!-- Section Title 
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Our Story</h2>
+        <p><span class="description-title"></span></p>
+      </div> End Section Title
+
+      <div class="container">
+
+        <div class="row gy-4">
+          
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-activity icon"></i></div>
+              <h4><a href="" class="stretched-link">Dreamy Proposals</a></h4>
+              <p>We specialize in crafting dreamy proposal setups that capture the essence of your love story.</p>
+            </div>
+            
+          </div>  End Service Item 
+          
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-bounding-box-circles icon"></i></div>
+              <h4><a href="" class="stretched-link">Proposal Setup</a></h4>
+              <p>Our goal is to ensure your proposal is not just a moment, but a timeless memory.<p>
+            </div>
+          </div> End Service Item 
+
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-broadcast icon"></i></div>
+              <h4><a href="" class="stretched-link">Candlelight Dinners</a></h4>
+              <p>Indulge in a romantic evening with our meticulously planned candlelight dinner.<p>
+            </div>
+          </div> End Service Item 
+
+        </div>
+
+      </div>
+
+    </section> /Services Section -->
+
+    <!-- Our Story Section -->
+<section id="our-story" class="services section">
+
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+  <h2>Our Story</h2>
+  <p><span class="description-title">How It All Began</span></p>
+</div><!-- End Section Title -->
+
+<div class="container">
+  <div class="row gy-5 align-items-center justify-content-center">
+
+    <!-- Image (Plain, No Frame) -->
+    <div class="col-lg-5" data-aos="fade-right" data-aos-delay="100">
+      <img src="{% static 'assets/images/pimg16.jpg' %}" alt="Our Story Image" class="img-fluid rounded-4 shadow">
+    </div>
+
+    <!-- Text with Sticky Note Style -->
+    <div class="col-lg-7" data-aos="fade-left" data-aos-delay="200">
+      <div class="story-content d-flex flex-column gap-4">
+
+        <!-- Sticky Note 1 -->
+        <div style="
+          background-color: #fff8dc;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 4px 6px 10px rgba(0,0,0,0.1);
+          transform: rotate(-2deg);
+          position: relative;
+          font-family: 'Georgia', cursive;
+          color: #8b4c5b;
+          max-width: 100%;
+        ">
+          <div style="
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fda4af;
+            color: white;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-family: 'Cursive';
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          ">
+            ✨ Love Scribble
+          </div>
+          <p style="margin-top: 10px;">
+            At <strong>Romance Retreat</strong>, we believe love deserves to be celebrated in the most enchanting ways. 
+            Our journey began with a heart full of dreams and a vision to make every proposal, every date, every little surprise bloom with love.
+          </p>
+        </div>
+
+        <!-- Sticky Note 2 -->
+        <div style="
+          background-color: #ffe4f2;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 4px 6px 10px rgba(0,0,0,0.1);
+          transform: rotate(1.5deg);
+          position: relative;
+          font-family: 'Georgia', cursive;
+          color: #914d6d;
+        ">
+          <div style="
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f9a8d4;
+            color: white;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-family: 'Cursive';
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          ">
+            💖 Heartfelt Moment
+          </div>
+          <p style="margin-top: 10px;">
+            With every event, we pour our hearts into making your love story unforgettable. From whimsical décor to heartfelt surprises, we craft memories that linger like sweet perfume in the air.
+          </p>
+        </div>
+
+        <!-- Sweet Quote -->
+        <div class="text-center mt-3">
+          <span style="font-family: 'Cursive'; font-size: 18px; color: #c94f7c;">
+            “Every love story is special, but ours is our favorite.”
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</section><!-- /Our Story Section -->
+
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section dark-background">
+
+      <img src="{% static '/assets/img/img2.jpeg'%}" alt="">
+
+      <div class="container">
+        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-xl-10">
+            <div class="text-center">
+              <h3>Are You Looking For Event Planners In GOA?</h3>
+              <a class="cta-btn" href="#contact">Call us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Call To Action Section -->
+
+    <!-- Portfolio Section -->
+
+   <!-- Filter Menu -->
+
+
+   <section id="portfolio" class="portfolio section">
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Portfolio</h2>
+      <p><span>Check Our</span> <span class="description-title">Portfolio</span></p>
+    </div>
+  
+    <div class="container">
+      <div class="isotope-layout" data-default-filter="*" data-layout="masonry">
+        <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+          <li data-filter="*" class="filter-active">All</li>
+          {% for group_name, photo_list in grouped_photos.items %}
+           {% if group_name != 'All' %}
+              <li data-filter=".filter-{{ group_name|slugify }}">{{ group_name }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+  
+        <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+          {% for group_name, photo_list in grouped_photos.items %}
+            {% if group_name != 'All' %}
+              {% for photo in photo_list %}
+                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ group_name|slugify }}">
+                  <img src="{{ photo.image.url }}" class="img-fluid" alt="{{ photo.title }}">
+                  <div class="portfolio-info">
+                    <h4>{{ photo.title }}</h4>
+                    <p>{{ group_name }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+<!--/Portfolio Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+
+        <h2>Contact</h2>
+        <p><span>Need Help?</span> <span class="description-title">Contact us<br></span></p>
+        <form action="{% url 'inquery' %}" method="post">
+
+        {% csrf_token %}
+
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-geo-alt flex-shrink-0"></i>
+              <div>
+                <h3>Address</h3>
+                <p>H.No: 1417, Satybhama Niwas, Tembwada, Morjim, Pernem, Goa</p>
+              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-telephone flex-shrink-0"></i>
+              <div>
+                <h3>Call Us</h3>
+                <p>+91 74991 63913</p>
+              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
+              <i class="bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h3>Email Us</h3>
+                <p>info@example.com</p>
+              </div>
+            </div><!-- End Info Item -->
+
+          </div>
+
+
+          <div class="col-lg-8">
+            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="error-message"></div>
+
+                  <button type="submit" class="btn px-4 py-2" style="background-color:rgb(219, 24, 99); color: white; border: none;">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+{% endblock %}  

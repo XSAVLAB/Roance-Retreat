@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Romance Repit
+{% endblock title %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section id="hero" class="hero section dark-background">
+  <img src="{{home.image.url}}" alt="" data-aos="fade-in">
+  <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h2 style="font-family: 'Georgia', sans-serif;">Our Services</h2>
+        <p style="font-size: 14px;">Brace Yourself for an Unforgettable Experience!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<div class="container py-5">
+  <h2 class="text-center mb-4">Packages</h2>
+  <div class="row g-4">
+
+    {% for s in service %}
+    <div class="col-md-4">
+      <div class="card service-card">
+        <img src="{{ s.image.url }}" alt="{{ s.title }}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{ s.title }}</h5>
+
+          <p class="card-text">{{ s.description }}</p>
+
+          <p class="card-text"> <i class="bi bi-currency-rupee"></i>{{s.price}}</p>
+
+          <!-- Book Now Button -->
+          <button class="btn btn-primary w-100 mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#bookingForm{{ s.id }}">Book Now</button>
+
+          <!-- Booking Form -->
+          <div class="collapse" id="bookingForm{{ s.id }}">
+            <form method="POST" action="{% url 'booking' %}" class="mt-2 p-3 border rounded bg-light shadow-sm">
+              {% csrf_token %}
+              <input type="hidden" name="service_title" value="{{ s.title }}">
+
+              <div class="mb-2">
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="mb-2">
+                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+              </div>
+              <div class="mb-2">
+                <input type="date" name="days" class="form-control" placeholder="Number of Days"  required>
+              </div>
+              <div class="mb-3">
+                <input type="text" name="contact" class="form-control" placeholder="Contact Number" required>
+              </div>
+              <button type="submit" class="btn btn-success w-100">Submit Booking</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}
