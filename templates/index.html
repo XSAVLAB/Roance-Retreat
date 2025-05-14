@@ -45,7 +45,7 @@
       <a href="index.html" class="logo d-flex align-items-center">
 
       <a class="navbar-brand" href="#">
-        <img src="{% static 'assets/img/logo.png' %}" alt="Romance Retreat"style="height: 140px; width: auto;"/><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a>  <a><a><a><a><a> </a>     
+        <img src="{% static 'assets/img/logo16.png' %}" alt="Romance Retreat"style="height: 140px; width: auto;"/><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a><a>  <a><a><a><a><a> </a>     
         <style>
           .navbar {
             min-height: 80px;
@@ -74,9 +74,13 @@
 
           <li><a href="#contact">Contact</a></li>
 
+          <li><a href="{% url 'gallery' %}">Gallery</a></li>
+
+
           {% if request.user.is_staff %}
           <li><a href="{% url 'admin:index' %}">Admin</a></li>
           {% endif %}
+
 
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -97,7 +101,7 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
+          <a href="{%url 'index' %}" class="logo d-flex align-items-center">
             <span class="sitename">Romance Retreat</span>
           </a>
           <p>At Romance Retreat, we specialize in creating unforgettable romantic experiences. From intimate getaways to exclusive surprises, our services are designed to bring love to life in the most magical way. Let us help you craft moments that will last forever.<p>
@@ -141,7 +145,7 @@
       </div>
     </div>
 
-    <div class="container copyright text-center mt-4">
+    <div class="container copyright text-right mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">Romance Retreat</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
@@ -155,7 +159,9 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" style="position: fixed; left: 20px; bottom: 20px; z-index: 999;">
+  <i class="bi bi-arrow-up-short"></i>
+</a>
 
   <!-- Preloader -->
   <div id="preloader"></div>
@@ -171,6 +177,155 @@
 
   <!-- Main JS File -->
   <script src="{% static '/assets/js/main.js' %}"></script>
+
+  {% if popup %}
+<style>
+   /* Modal background */
+   .modal {
+     display: none;
+     position: fixed;
+     z-index: 1050;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.7); /* Darker background for better contrast */
+     opacity: 0;
+     transition: opacity 0.3s ease;
+   }
+
+   /* Modal content */
+   .modal-content {
+     margin: 5% auto;
+     position: relative;
+     padding: 0;
+     width: 80%; /* Modal width will be 80% of the screen width */
+     max-width: 600px; /* Maximum width */
+     min-width: 300px; /* Minimum width */
+     max-height: 80vh; /* Limit the height to 80% of the viewport height */
+     overflow: auto; /* Allow scrolling if content is too large */
+     background-color: #fff;
+     border-radius: 8px;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+     animation: fadeIn 0.3s ease;
+   }
+
+   /* Image inside modal */
+   .modal-content img {
+     width: 100%;
+     height: auto;
+     border-radius: 8px;
+     object-fit: contain; /* Ensures the image fits within the modal without distortion */
+   }
+
+   /* Smaller Close button style */
+   .close {
+     position: absolute;
+     top: 5px;
+     right: 5px;
+     background: #d3d3d3; /* Light grey background */
+     color: #fff;
+     font-size: 18px; /* Smaller font size */
+     padding: 8px 10px; /* Reduced padding */
+     border-radius: 4px; /* Square with slightly rounded corners */
+     cursor: pointer;
+     border: none;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Slight shadow for depth */
+     transition: all 0.3s ease;
+     text-align: center;
+   }
+
+   /* Hover effect for close button */
+   .close:hover {
+     background-color: #b0b0b0; /* Darker grey on hover */
+     transform: scale(1.1); /* Slight zoom effect */
+     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Larger black shadow on hover */
+   }
+
+   /* Fade-in animation */
+   @keyframes fadeIn {
+     from {
+       opacity: 0;
+       transform: scale(0.9);
+     }
+     to {
+       opacity: 1;
+       transform: scale(1);
+     }
+   }
+</style>
+
+<!-- Modal -->
+<div id="popupModal" class="modal">
+   <div class="modal-content">
+     <span class="close">&times;</span>
+     <img src="{{ popup.image.url }}" alt="Special Offer">
+   </div>
+</div>
+
+<script>
+   window.onload = function () {
+     const modal = document.getElementById("popupModal");
+     const closeBtn = document.querySelector(".modal .close");
+
+     // Show the modal with fade-in effect
+     setTimeout(() => {
+       modal.style.display = "block";
+       setTimeout(() => modal.style.opacity = "1", 50); // Delay opacity for smooth transition
+     }, 200); // Delay for smoother appearance on page load
+
+     // Close button functionality
+     closeBtn.onclick = function () {
+       modal.style.opacity = "0";
+       setTimeout(() => modal.style.display = "none", 300); // Fade-out and hide after
+     }
+
+     // Close modal if clicked outside
+     window.onclick = function (event) {
+       if (event.target == modal) {
+         modal.style.opacity = "0";
+         setTimeout(() => modal.style.display = "none", 300);
+       }
+     }
+   }
+</script>
+{% endif %}
+
+    <!-- WhatsApp Floating Button -->
+<a href="https://wa.me/{{ app.number }}" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <i class="bi bi-whatsapp whatsapp-icon"></i>
+</a>
+
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 24px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 1000;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .whatsapp-float:hover {
+    background-color: #1ebe5d;
+    text-decoration: none;
+    color: white;
+  }
+
+  .whatsapp-icon {
+    font-size: 28px;
+  }
+</style>
+
 
 </body>
 

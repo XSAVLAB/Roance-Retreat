@@ -23,6 +23,7 @@ class booking(models.Model):
     email= models.TextField(null=True, blank=True)
     booking_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     days = models.DateField(null=True, blank=True)
+    address = models.TextField(max_length=225, null=True)
     contact = models.IntegerField(null=True, blank=True)
     service_title = models.CharField(max_length=225,null=True)
     def __str__(self):
@@ -49,4 +50,37 @@ class hero(models.Model):
     image=models.ImageField(upload_to='home/')
     
 #class user(models.Model):
+
+class PopupImage(models.Model):
+    image = models.ImageField(upload_to='popup/')
+    is_active = models.BooleanField(default=True)  # Only show if active
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Popup Image - {self.updated_at.strftime('%Y-%m-%d')}"
+    
+class Gallery(models.Model):
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='gallery_images/', null=True, blank=True)
+    video_url = models.URLField(null=True, blank=True)  # For video URL
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+    
+class Ourstory(models.Model):
+    image =  models.ImageField(upload_to='story/',null=True,blank=True)
+    description1 = models.TextField(null=True)
+    description2 = models.TextField(null=True)
+    
+    def __str__(self):
+     return f"Our Story Image"
+ 
+class Whatsapp(models.Model):
+    name = models.CharField(max_length=100,null=True)
+    number = models.IntegerField(null=True,blank=True)
+    
+    def __str__(self):
+        return self.name
     

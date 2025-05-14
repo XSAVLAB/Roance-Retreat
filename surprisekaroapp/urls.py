@@ -6,5 +6,5 @@ urlpatterns = [
     path('service/',views.services,name="service"),
     path('inquery/', views.inquery, name= "inquery"),
     path('booking/',views.book_service, name= "booking"),
-
+    path('gallery/', views.gallery, name='gallery'),
 ]
