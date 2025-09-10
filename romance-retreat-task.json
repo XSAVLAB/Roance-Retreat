@@ -1,0 +1,64 @@
+{
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "cpu": 0,
+            "environment": [],
+            "environmentFiles": [],
+            "essential": true,
+            "image": "606635532539.dkr.ecr.ap-southeast-2.amazonaws.com/xsavlab/romance-retreat:latest",
+            "mountPoints": [],
+            "name": "romance-retreat",
+            "portMappings": [
+                {
+                    "appProtocol": "http",
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "name": "romance-retreat-8000-tcp",
+                    "protocol": "tcp"
+                }
+            ],
+            "systemControls": [],
+            "ulimits": [],
+            "volumesFrom": []
+        }
+    ],
+    "cpu": "1024",
+    "enableFaultInjection": false,
+    "executionRoleArn": "arn:aws:iam::606635532539:role/ecsTaskExecutionRole",
+    "family": "romance-retreat-task",
+    "memory": "3072",
+    "networkMode": "awsvpc",
+    "placementConstraints": [],
+    "registeredAt": "2025-09-10T22:23:23.130Z",
+    "registeredBy": "arn:aws:iam::606635532539:root",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "revision": 1,
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "status": "ACTIVE",
+    "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:606635532539:task-definition/romance-retreat-task:1",
+    "volumes": [],
+    "tags": []
+}
