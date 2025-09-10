@@ -12,19 +12,21 @@
       "image": "606635532539.dkr.ecr.ap-southeast-2.amazonaws.com/xsavlab/romance-retreat:latest",
       "essential": true,
       "cpu": 0,
-      "environment": [],
-      "environmentFiles": [],
-      "mountPoints": [],
       "portMappings": [
         {
           "containerPort": 8000,
-          "hostPort": 8000,
+          "hostPort": 0,
           "protocol": "tcp"
         }
       ],
-      "systemControls": [],
-      "ulimits": [],
-      "volumesFrom": []
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/romance-retreat",
+          "awslogs-region": "ap-southeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
     }
   ],
   "volumes": []
