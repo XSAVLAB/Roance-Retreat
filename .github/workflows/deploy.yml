@@ -1,0 +1,52 @@
+name: Build and Deploy to GKE
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      # Authenticate to Google Cloud via Workload Identity Federation
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: access_token
+          workload_identity_provider: "projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-pool-2/providers/github-provider"
+          service_account: "gha-deployer@romance-retreat.iam.gserviceaccount.com"
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Build and push Docker image
+        run: |
+          IMAGE="us-central1-docker.pkg.dev/romance-retreat/romance-docker-repo/romance-retreat-app:${GITHUB_SHA}"
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+
+            - name: Deploy to GKE
+        run: |
+          # Get credentials for the cluster
+          gcloud container clusters get-credentials romance-retreat-cluster \
+            --zone us-central1-a \
+            --project romance-retreat
+          
+          # Update the image in Deployment, fallback to apply if Deployment doesn't exist
+          kubectl set image deployment/romance-retreat-app \
+            romance-retreat-app=$IMAGE --namespace=default || kubectl apply -f k8s/deployment.yml
+          
+          # Apply Service (LoadBalancer)
+          kubectl apply -f k8s/service.yml

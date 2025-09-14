@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: romance-retreat-app
+  labels:
+    app: romance-retreat-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: romance-retreat-app
+  template:
+    metadata:
+      labels:
+        app: romance-retreat-app
+    spec:
+      containers:
+        - name: romance-retreat-app
+          image: us-central1-docker.pkg.dev/romance-retreat/romance-docker-repo/romance-retreat-app:latest
+          ports:
+            - containerPort: 8000 # <--- Match Dockerfile EXPOSE
