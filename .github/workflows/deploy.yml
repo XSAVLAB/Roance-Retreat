@@ -37,16 +37,16 @@ jobs:
           docker push "$IMAGE"
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
-            - name: Deploy to GKE
+      - name: Deploy to GKE
         run: |
           # Get credentials for the cluster
           gcloud container clusters get-credentials romance-retreat-cluster \
             --zone us-central1-a \
             --project romance-retreat
-          
+
           # Update the image in Deployment, fallback to apply if Deployment doesn't exist
           kubectl set image deployment/romance-retreat-app \
             romance-retreat-app=$IMAGE --namespace=default || kubectl apply -f k8s/deployment.yml
-          
+
           # Apply Service (LoadBalancer)
           kubectl apply -f k8s/service.yml
