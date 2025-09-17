@@ -16,41 +16,25 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - id: "auth"
-        uses: "google-github-actions/auth@v2"
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
         with:
-          token_format: "access_token"
-          workload_identity_provider: "projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-pool-2/providers/github-provider"
-          service_account: "gha-deployer@romance-retreat.iam.gserviceaccount.com"
+          workload_identity_provider: projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-pool-2/providers/github-provider
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
 
-      - name: Set up gcloud
+      - name: Set up gcloud SDK
         uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          install_components: "gke-gcloud-auth-plugin"
 
       - name: Configure Docker
         run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
 
       - name: Build and push Docker image
         run: |
-          IMAGE="us-central1-docker.pkg.dev/romance-retreat/romance-retreat/romance-retreat-app:${GITHUB_SHA}"
+          IMAGE="us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/romance-retreat/romance-retreat-app:${GITHUB_SHA}"
           docker build -t "$IMAGE" .
           docker push "$IMAGE"
-          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
-
-      - name: Install gke-gcloud-auth-plugin
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
-
-      - name: Deploy to GKE
-        run: |
-          # Get credentials for the cluster
-          gcloud container clusters get-credentials romance-retreat-cluster \
-            --zone us-central1-a \
-            --project romance-retreat
-
-          # Update the image in Deployment, fallback to apply if Deployment doesn't exist
-          kubectl set image deployment/romance-retreat-app \
-            romance-retreat-app=$IMAGE --namespace=default || kubectl apply -f k8s/deployment.yml
-
-          # Apply Service (LoadBalancer)
-          kubectl apply -f k8s/service.yml
+          echo "IMAGE=$IMAG
