@@ -37,4 +37,20 @@ jobs:
           IMAGE="us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/romance-retreat/romance-retreat-app:${GITHUB_SHA}"
           docker build -t "$IMAGE" .
           docker push "$IMAGE"
-          echo "IMAGE=$IMAG
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+
+      - name: Deploy to GKE
+        env:
+          USE_GKE_GCLOUD_AUTH_PLUGIN: "True"
+        run: |
+          # Get credentials for the cluster
+          gcloud container clusters get-credentials romance-retreat-cluster \
+            --zone us-central1-a \
+            --project ${{ secrets.GCP_PROJECT_ID }}
+
+          # Update the image in Deployment (fallback to apply if not found)
+          kubectl set image deployment/romance-retreat-app \
+            romance-retreat-app=$IMAGE --namespace=default || kubectl apply -f k8s/deployment.yml
+
+          # Apply Service
+          kubectl apply -f k8s/service.yml
