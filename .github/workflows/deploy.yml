@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-      # Authenticate to Google Cloud via Workload Identity Federation
+
       - id: "auth"
         uses: "google-github-actions/auth@v2"
         with:
@@ -35,6 +35,11 @@ jobs:
           docker build -t "$IMAGE" .
           docker push "$IMAGE"
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
 
       - name: Deploy to GKE
         run: |
