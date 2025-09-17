@@ -20,7 +20,7 @@ jobs:
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-pool-2/providers/github-provider
+          workload_identity_provider: projects/${{ secrets.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/github-pool-2/providers/github-provider
           service_account: ${{ secrets.GCP_SA_EMAIL }}
 
       - name: Set up gcloud SDK
