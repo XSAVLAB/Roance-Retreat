@@ -15,7 +15,8 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-
+      - name: Debug GCP_PROJECT_NUMBER
+        run: echo "Project Number is ${{ secrets.GCP_PROJECT_NUMBER }}"
       # Authenticate to Google Cloud via Workload Identity Federation
       - id: "auth"
         uses: "google-github-actions/auth@v2"
